@@ -20,6 +20,47 @@ y leer los datos ingresados en "usuario" y "email".
 con los datos almacenados en memoria, a fin de darle la bienvenida al usuario logeado.
 
 */
+console.log("----------------------------------------");
+console.log("Almacenamiento local (localStorage)");
+
+// Método ->  localStorage.setItem(clave, valor)
+// clave = nombre para identificar el elemento
+// valor = valor/contenido del elemento
+document.querySelector("#btnIngresar").onclick = async () => {
+    const usuario = document.querySelector("#usuario").value;
+    const email = document.querySelector("#email").value;
+    if(usuario == "" || email == "") {   
+        alert("Indique usuario y email");
+        return;
+    }
+    localStorage.setItem('usuario', usuario);
+    localStorage.setItem('email', email);  
+}
+let usuario =  localStorage.getItem('usuario');
+let email =  localStorage.getItem('email');
+
+console.log("Analizar el tipo de dato que se recupera del storage");
+console.log(typeof usuario); //string;
+console.log(typeof email); //string;
+
+console.log("----------------------------------------");
+console.log("Almacenamiento de sesión (sessionStorage)");
+
+// Método ->  sessionStorage.setItem(clave, valor)
+// clave = nombre del elemento
+// valor = Contenido del elemento
+sessionStorage.setItem('usuario', 'usuarioLogeado');
+sessionStorage.setItem('email', 'emailLogeado');
+
+let lista = sessionStorage.getItem('usuario');
+let mail =  sessionStorage.getItem('email');
+
+console.log("Analizar como se recuperar los datos del storage")
+console.log(usuario); 
+console.log(email); 
+console.log("Bienvenido: " + "  " + usuario  +  
+      "."+ "  Email: " + " "+ email);
+
 
 /* 2 - Enunciado
 
@@ -31,6 +72,16 @@ almacenados los datos de "usuario" y "email".
 y deberá revelar la sección "logout" (quitar la clase hidden).
 
 */
+//Guarda una clave
+
+localStorage.usuario= 'usuario';
+localStorage.email = 'email';
+
+console.log("----------------------------------------")
+console.log(" 3- Eliminar datos")
+
+localStorage.removeItem('#login');
+console.log("----------------------------------------")
 
 /* 3 - Enunciado
 
@@ -39,5 +90,11 @@ botón sea presionado deberá borrar de memoria las variables de este programa.
 - Luego deberá refrescar la página (desde javascript, con window.location.reload()) y al
 volverse a cargar debería aparecer nuevamente la sección de bienvenida
 ya que no debería haber más datos en memoria cargados.
-
 */
+
+const cargar = document.getElementById('btnSalir');
+
+cargar.addEventListener('click', _ => { // el _ es para indicar la ausencia de parametros
+    location.reload();
+});
+
