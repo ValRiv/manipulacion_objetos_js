@@ -51,20 +51,18 @@ document.body.appendChild(contenido);
 const edadIngresar = document.createElement('p');
 edadIngresar.innerText = 'Ingrese una edad: '
 document.body.appendChild(edadIngresar);
-const inputEdad = document.createElement("input");
-inputEdad.id = "IdInput";
-inputEdad.name = "edad";
-inputEdad.placeholder = "Edad";
-inputEdad.type = "text";
-inputEdad.classList.add('edad');
-document.body.appendChild(inputEdad);
+const edadHtml = document.createElement("input");
+edadHtml.placeholder = "Edad";
+edadHtml.type = "number";
+edadHtml.classList.add('edad');
+document.body.appendChild(edadHtml);
 
-const button1 = document.createElement("button");
-button1.innerHTML = "INGRESAR";
-document.body.appendChild(button1);
-button1.onclick = () => {
+const button = document.createElement("button");
+button.innerHTML = "INGRESAR";
+document.body.appendChild(button);
+button.onclick = () => {
     
-    if (inputEdad.value>=18) {
+    if (edadHtml.value>=18) {
     const personas = JSON.parse(personasJSON);
     const personasFilter = personasArray.filter(personas => personas.edad >= 18);
     personasFilter.forEach(persona => {
