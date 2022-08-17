@@ -19,7 +19,7 @@ un array de personas mayores o igual a 18 años.
 - Imprimir en consola el array resultante.
 
 */
-function funcionEjecutar(){
+
 console.log('----------------------ENUNCIADO 1A----------------------------------')
 const personasArray = JSON.parse(personasJSON);
 console.log(typeof personasJSON); // object
@@ -28,38 +28,64 @@ console.log(personasArray);
 
 console.log('----------------------ENUNCIADO 1B----------------------------------')
 const personasFilter = personasArray.filter(personas => personas.edad >= 18);
-console.log(personasFilter);
-
+personasFilter.forEach(persona => {
+    console.log("Nombre: " + persona.nombre + "," + "Edad: " + persona.edad)
+})
 /* 2 - Enunciado
 
 - Con el array de personas filtradas (resultado del enunciado anterior)
-utilice le método forEach para en cada iteración con cada persona
-renderizar el nombre y edad de esa persona en el HTML.
 - Agregue al HTML los elementos que crea necesario e utilice los
 mecanismos que prefiera para agregar por cada persona el nombre y edad
 en el HTML (es decir, generar el contenido de forma dinámica).
 
 */
-
 console.log('----------------------ENUNCIADO 2----------------------------------')
-personasFilter.forEach((persona) => {
-    console.log(persona);
-});
 
-function agregarElementosHTML() {
-    const divHTML = document.getElementById("personaHtml");
+const lista = document.createElement('p');
+const contenido = document.createElement('p');
+lista.innerText = 'Aqui estan los datos del JSON: '
+contenido.innerText = personasJSON
+document.body.appendChild(lista);
+document.body.appendChild(contenido);
 
-    personasArray.forEach(function (personas, index) {
-        const lista = document.createElement("li");
-        const contenido = document.createTextNode(personas.nombre + ' ' + personas.edad + " ");
-        divHTML.appendChild(lista);
-        lista.appendChild(contenido);
+const edadIngresar = document.createElement('p');
+edadIngresar.innerText = 'Ingrese una edad: '
+document.body.appendChild(edadIngresar);
+const inputEdad = document.createElement("input");
+inputEdad.id = "IdInput";
+inputEdad.name = "edad";
+inputEdad.placeholder = "Edad";
+inputEdad.type = "text";
+inputEdad.classList.add('edad');
+document.body.appendChild(inputEdad);
+
+const button1 = document.createElement("button");
+button1.innerHTML = "INGRESAR";
+document.body.appendChild(button1);
+button1.onclick = () => {
+    
+    if (inputEdad.value>=18) {
+    const personas = JSON.parse(personasJSON);
+    const personasFilter = personasArray.filter(personas => personas.edad >= 18);
+    personasFilter.forEach(persona => {
+        console.log("Nombre: " + persona.nombre + "," + "Edad: " + persona.edad)
+        const nombrehtml=document.createElement('p');
+        nombrehtml.innerText= ("Nombre: " + persona.nombre + "," + "Edad: " + persona.edad)
+        
+        document.body.appendChild(nombrehtml);
+    })
+} else {
+    const personasFilter = personasArray.filter(personas => personas.edad <= 18);
+    personasFilter.forEach(persona => {
+        console.log("Nombre: " + persona.nombre + "," + "Edad: " + persona.edad)
+        const nombrehtml=document.createElement('p');
+        nombrehtml.innerText= ("Nombre: " + persona.nombre + "," + "Edad: " + persona.edad)
+        document.body.appendChild(nombrehtml);
     })
 }
-agregarElementosHTML() + console.log( " Mas lista en HTML");
-
-console.log('-------------------------ENUNCIADO 3 -------------------------------')
 }
+
+
 /* 3 - BONUS TRACK
 
 - Si misión, en caso que decida aceptarla, es que la edad a filtrar
@@ -70,14 +96,10 @@ se dispare al presionar un botón en el HTML que usted agregue.
 
 */
 
-const articulo = document.querySelector('article');
-const numero = document.querySelector('input');
-numero.onchange = () => {
-    alert("Su edad es:  " + numero.value)
-    console.log("La edad ingresada es: " + numero.value + " años")
-}
 
-//----------------------------------FIN-------------------------------------------//
+
+
+
  
 
 
